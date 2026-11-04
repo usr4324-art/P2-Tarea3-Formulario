@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,18 +15,12 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
-            decoration: BoxDecoration(
-              color: primaryColor,
-            ),
+            decoration: BoxDecoration(color: primaryColor),
             child: Align(
               alignment: Alignment.bottomLeft,
               child: Text(
                 'My Portfolio',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -43,6 +36,13 @@ class AppDrawer extends StatelessWidget {
             title: const Text('My Portfolio'),
             onTap: () {
               context.go('/portfolio');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.place),
+            title: const Text('Places'),
+            onTap: () {
+              context.go('/places');
             },
           ),
         ],
