@@ -133,6 +133,42 @@ class _PlacesPageState extends State<PlacesPage> {
     );
   }
 
+  void _showDeleteAllDialog() {
+    if (places.isEmpty) return;
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: const Text('Delete all places?'),
+          content: const Text(
+            'Are you sure you want to delete all places? '
+            'This action cannot be undone.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(dialogContext);
+              },
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
+              onPressed: () {
+                setState(() {
+                  places.clear();
+                });
+
+                Navigator.pop(dialogContext);
+              },
+              child: const Text('Delete All'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -183,6 +219,14 @@ class _PlacesPageState extends State<PlacesPage> {
                             '${place.description}\n'
                             '${place.island} - ${place.category}',
                           ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () {
+                              setState(() {
+                                places.removeAt(index);
+                              });
+                            },
+                          ),
                         ),
                       );
                     },
@@ -190,11 +234,26 @@ class _PlacesPageState extends State<PlacesPage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddPlaceDialog,
-        backgroundColor: primaryColor,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
+
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton.extended(
+            onPressed: _showDeleteAllDialog,
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+            icon: const Icon(Icons.delete_sweep),
+            label: const Text('Delete All'),
+          ),
+          const SizedBox(width: 12),
+          FloatingActionButton.extended(
+            onPressed: _showAddPlaceDialog,
+            backgroundColor: primaryColor,
+            foregroundColor: Colors.white,
+            icon: const Icon(Icons.add),
+            label: const Text('Add Place'),
+          ),
+        ],
       ),
     );
   }
