@@ -41,6 +41,8 @@ PGL-P2-MyPortfolio/
 │   ├── widgets/
 │       └── app_drawer.dart
 |       └── app_router.dart
+|       └── place_item.dart
+|       └── places_page.dart
 |       └── portfolio_page.dart
 |       └── welcome_page.dart
 │   
@@ -105,5 +107,9 @@ El objetivo es desarrollar una aplicación Flutter que permita practicar la crea
 ### Pantalla My Hobbies
 
 ![Pantalla de hobbies](screenshots/my_hobbies.png)
+
+### Pantalla CRUD 
+
+![Pantalla CRUD](screenshots/crud.png)
 
 **Desarrollado con Flutter 💙🏝️**
