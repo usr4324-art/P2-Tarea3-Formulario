@@ -17,7 +17,7 @@ class AuthService {
         'Content-Type': 'application/json',
       },
       body: jsonEncode({
-        'name': name,
+        'fullName': name,
         'email': email,
         'pwd': password,
       }),
@@ -43,4 +43,28 @@ class AuthService {
 
     return jsonDecode(response.body) as Map<String, dynamic>;
   }
+
+
+  Future<Map<String, dynamic>> checkToken(String token) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/users/check-token'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    return jsonDecode(response.body) as Map<String, dynamic>;
+  }
+
+  Future<Map<String, dynamic>> getWelcome(String token) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/users/welcome'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    return jsonDecode(response.body) as Map<String, dynamic>;
+  }
+
 }
